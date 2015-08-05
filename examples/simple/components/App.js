@@ -27,7 +27,7 @@ export default class App extends Component {
     }
     return (
       <div>
-        Sign in:
+        <p>Sign in:</p>
         <button onClick={this.handleLogin.bind(this, 'facebook')}>Facebook</button>
         <button onClick={this.handleLogin.bind(this, 'github')}>GitHub</button>
         <button onClick={this.handleLogin.bind(this, 'google')}>Google</button>

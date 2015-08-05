@@ -48,7 +48,9 @@ class Reindex {
         window_features: stringifyWindowFeatures(provider.windowFeatures),
       }, (error, response) => {
         if (error) {
-          reject(error);
+          reject({ code: 'LOGIN_FAILED', message: error });
+        } else if (response.error) {
+          reject(response.error);
         } else {
           resolve(response);
         }

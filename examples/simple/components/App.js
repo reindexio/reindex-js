@@ -4,12 +4,13 @@ import Reindex from 'reindex';
 const reindex = new Reindex('http://tmdb.localhost.reindexio.com:5000');
 
 export default class App extends Component {
-  state = { user: null }
+  state = { error: null, user: null }
 
   handleLogin = (provider) => {
-    reindex.login(provider).then((response) => {
-      this.setState({user: response.user});
-    });
+    this.setState({error: null, user: null});
+    reindex.login(provider)
+      .then((response) => this.setState({user: response.user}))
+      .catch((reason) => this.setState({error: reason}));
   }
 
   handleLogout = () => {
@@ -17,11 +18,16 @@ export default class App extends Component {
   }
 
   render() {
+    let error = null;
+    if (this.state.error) {
+      error = <p>{this.state.error.message}</p>;
+    }
     if (this.state.user) {
       return (
         <div>
           <p>Signed in as {this.state.user.id}</p>
           <button onClick={this.handleLogout}>Sign out</button>
+          {error}
         </div>
       );
     }
@@ -32,6 +38,7 @@ export default class App extends Component {
         <button onClick={this.handleLogin.bind(this, 'github')}>GitHub</button>
         <button onClick={this.handleLogin.bind(this, 'google')}>Google</button>
         <button onClick={this.handleLogin.bind(this, 'twitter')}>Twitter</button>
+        {error}
       </div>
     );
   }

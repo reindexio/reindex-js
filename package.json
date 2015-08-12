@@ -1,7 +1,7 @@
 {
-  "name": "library-boilerplate",
-  "version": "1.0.0",
-  "description": "library-boilerplate-description",
+  "name": "reindex",
+  "version": "0.1.0",
+  "description": "Client library for Reindex",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib dist",

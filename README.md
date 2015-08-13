@@ -1,5 +1,5 @@
-library-boilerplate
-=========================
+reindex
+=======
 
 An opinionated setup I plan to use for my libraries.
 

@@ -25,11 +25,11 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel-loader'],
-      exclude: /node_modules/
+      exclude: /node_modules/,
     }]
   },
   output: {
-    library: 'library-boilerplate',
+    library: 'reindex',
     libraryTarget: 'umd'
   },
   plugins: plugins,

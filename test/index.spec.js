@@ -1,8 +1,9 @@
 import expect from 'expect';
-import { add } from '../src';
+import Reindex from '../src';
 
-describe('add', () => {
-  it('should add 2 and 2', () => {
-    expect(add(2, 2)).toBe(4);
+describe('Reindex', () => {
+  it('creates a new Reindex client instance', () => {
+    const reindex = new Reindex('http://localhost:5000');
+    expect(reindex).toBeTruthy();
   });
 });

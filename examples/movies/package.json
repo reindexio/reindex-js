@@ -1,7 +1,7 @@
 {
-  "name": "reindex-example-simple",
+  "name": "reindex-example-movies",
   "version": "1.0.0",
-  "description": "Reindex simple example",
+  "description": "Reindex movies example",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -1,6 +1,13 @@
+import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
 import invariant from 'invariant';
 import Promise from 'bluebird';
-import WinChan from 'winchan';
+
+let WinChan;
+if (ExecutionEnvironment.canUseDOM) {
+  WinChan = require('winchan');
+}
+
+import ReindexRelayNetworkLayer from './ReindexRelayNetworkLayer';
 
 const SUPPORTED_PROVIDERS = {
   facebook: {
@@ -29,12 +36,17 @@ class Reindex {
    */
   constructor(url) {
     this._url = url;
+    this._token = null;
   }
 
   /**
    * Login via given `providerName`.
    */
   login(providerName) {
+    invariant(
+      ExecutionEnvironment.canUseDOM,
+      'login(...) can only be used in a browser. In Node.js, use setToken().'
+    );
     const provider = SUPPORTED_PROVIDERS[providerName];
     invariant(
       provider,
@@ -56,6 +68,19 @@ class Reindex {
         }
       });
     });
+  }
+
+  setToken(token) {
+    this._token = token;
+  }
+
+  getRelayNetworkLayer(timeout = null, retryDelays = null) {
+    return new ReindexRelayNetworkLayer(
+      this._url + '/graphql',
+      timeout,
+      retryDelays,
+      () => this._token,
+    );
   }
 }
 

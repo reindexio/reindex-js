@@ -1,6 +1,6 @@
 {
   "name": "reindex",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha1",
   "description": "Client library for Reindex",
   "main": "lib/index.js",
   "scripts": {

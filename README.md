@@ -2,7 +2,8 @@
 
 [![Circle CI](https://circleci.com/gh/reindexio/reindex-js.svg?style=svg&circle-token=1f82afd0b2c01310887098f125fa8a9b3980f1ea)](https://circleci.com/gh/reindexio/reindex-js)
 
-`reindex-js` is a client library that makes using Reindex easier. It provides
+`reindex-js` is a client library that makes using Reindex
+([https://www.reindex.io](https://www.reindex.io)) easier. It provides
 support for authentication, including social login. It also exposes hooks for
 using Reindex with Relay and other libraries.
 

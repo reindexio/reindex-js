@@ -1,0 +1,5 @@
+**/node_modules
+**/webpack.config.js
+examples/**/server.js
+lib
+src/fbjs

@@ -28,7 +28,7 @@ import Reindex from 'reindex-js'
 Create an instance.
 
 ```js
-const reindex = new Reindex('https://YOUR-REINDEX-URL.reindexio.com');
+const reindex = new Reindex('https://YOUR-REINDEX-URL.myreindex.com');
 ```
 
 ## API
@@ -41,7 +41,7 @@ create it in one model and export.
 ```js
 import Reindex from 'reindex';
 
-const reindex = new Reindex('https://YOUR-REINDEX-URL.reindexio.com');
+const reindex = new Reindex('https://YOUR-REINDEX-URL.myreindex.com');
 export default reindex;
 ```
 
@@ -110,7 +110,7 @@ Returns RelayNetworkLayer. Usage:
 import Relay from 'react-relay';
 import Reindex from 'reindex-js';
 
-const reindex = new Reindex('https://YOUR-REINDEX-URL.reindexio.com');
+const reindex = new Reindex('https://YOUR-REINDEX-URL.myreindex.com');
 
 Relay.injectNetworkLayer(Reindex.getRelayNetworkLayer());
 ```

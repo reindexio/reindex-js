@@ -34,6 +34,19 @@ function stringifyWindowFeatures(windowFeatures) {
     .join(',');
 }
 
+class APIError extends Error {
+  constructor(response, responseBody, url) {
+    const message = responseBody ?
+      responseBody.error || responseBody :
+      'Empty response body';
+    super('API error: ' + message);
+    this.message = message;
+    this.statusCode = response.status;
+    this.code = responseBody && responseBody.error;
+    this.url = url;
+  }
+}
+
 class Reindex extends EventEmitter {
   /**
    * Constructs a new `Reindex` instance from a Reindex app URL.
@@ -105,18 +118,29 @@ class Reindex extends EventEmitter {
     this.emit('tokenChange', token);
   }
 
-  query(query, variables) {
-    return fetch(this._url + '/graphql', {
+  async query(query, variables) {
+    const url = this._url + '/graphql';
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         ...this.getAuthenticationHeaders(),
       },
       body: JSON.stringify({
-          query: query,
-          variables: variables,
+        query: query,
+        variables: variables,
       }),
     });
+    let result;
+    try {
+      result = await response.json();
+    } catch (e) {
+      result = null;
+    }
+    if (response.status < 200 || response.status >= 300 || !result) {
+      throw new APIError(response, result, url);
+    }
+    return result;
   }
 
   getAuthenticationHeaders() {
@@ -133,7 +157,7 @@ class Reindex extends EventEmitter {
       this._url + '/graphql',
       timeout,
       retryDelays,
-      this.getAuthenticationHeaders.bind(this),
+      this.getAuthenticationHeaders.bind(this)
     );
   }
 

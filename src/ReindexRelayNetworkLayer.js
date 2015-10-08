@@ -1,6 +1,7 @@
-import fetch from 'isomorphic-fetch';
 import fetchWithRetries from './fbjs/fetchWithRetries';
 import Promise from 'bluebird';
+
+import fetch from './fetch';
 
 class ReindexRelayNetworkLayer {
 

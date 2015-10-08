@@ -17,7 +17,7 @@ var ExecutionEnvironment = require('fbjs/lib/ExecutionEnvironment');
 var Promise = require('bluebird');
 
 var sprintf = require('fbjs/lib/sprintf');
-var fetch = require('isomorphic-fetch');
+var fetch = require('../fetch');
 var warning = require('fbjs/lib/warning');
 
 type InitWitRetries = {

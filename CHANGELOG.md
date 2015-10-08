@@ -1,5 +1,9 @@
 # Change log
 
+## 0.3.0 (Oct 8, 2015)
+
+* Make queries and Relay network layer work in react-native (#3).
+
 ## 0.2.1 (Oct 1, 2015)
 
 * Fix babel-runtime error (#2).

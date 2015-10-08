@@ -45,6 +45,7 @@
   "dependencies": {
     "babel-runtime": "^5.8.25",
     "bluebird": "^2.9.34",
+    "fbemitter": "^2.0.0",
     "fbjs": "0.1.0-alpha.7",
     "invariant": "^2.1.0",
     "isomorphic-fetch": "^2.1.1",

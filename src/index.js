@@ -1,8 +1,9 @@
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'fbemitter';
 import ExecutionEnvironment from 'fbjs/lib/ExecutionEnvironment';
 import invariant from 'invariant';
 import Promise from 'bluebird';
-import fetch from 'isomorphic-fetch';
+
+import fetch from './fetch';
 
 let WinChan;
 if (ExecutionEnvironment.canUseDOM) {

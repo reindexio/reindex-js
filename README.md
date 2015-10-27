@@ -112,7 +112,7 @@ import Reindex from 'reindex-js';
 
 const reindex = new Reindex('https://YOUR-REINDEX-URL.myreindex.com');
 
-Relay.injectNetworkLayer(Reindex.getRelayNetworkLayer());
+Relay.injectNetworkLayer(reindex.getRelayNetworkLayer());
 ```
 
 ### Events

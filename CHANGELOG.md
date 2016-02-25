@@ -1,5 +1,9 @@
 # Change log
 
+## 0.4.0 (Feb 25, 2016)
+
+* Add Auth0 authentication and login with an Auth0 token.
+
 ## 0.3.1 (Dec 6, 2015)
 
 * Fix an issue with latest react-native and .babelrc (#5).

@@ -15,6 +15,9 @@ import ReindexRelayNetworkLayer from './ReindexRelayNetworkLayer';
 const TOKEN_KEY = 'REINDEX_TOKEN';
 
 const SUPPORTED_PROVIDERS = {
+  auth0: {
+    windowFeatures: { width: 320, height: 568 },
+  },
   facebook: {
     windowFeatures: { width: 500, height: 467 },
   },
@@ -28,6 +31,17 @@ const SUPPORTED_PROVIDERS = {
     windowFeatures: { width: 450, height: 635 },
   },
 };
+
+const loginWithTokenQuery = `
+mutation LoginWithTokenMutation($input: ReindexLoginWithTokenInput!) {
+  loginWithToken(input: $input) {
+    user {
+      id
+    }
+    token
+  }
+}
+`;
 
 function stringifyWindowFeatures(windowFeatures) {
   return Object.keys(windowFeatures)
@@ -92,6 +106,26 @@ class Reindex extends EventEmitter {
         }
       });
     });
+  }
+
+  async loginWithToken(provider, token) {
+    invariant(
+      SUPPORTED_PROVIDERS[provider],
+      'Reindex.loginWithToken(...): unknown provider "%s"',
+      provider,
+    );
+    const input = {
+      token,
+      provider,
+    };
+    const { data, errors } = await this.query(loginWithTokenQuery, { input });
+    if (errors) {
+      throw new Error(errors[0].message);
+    }
+    const response = data.loginWithToken;
+    this.setToken(response.token);
+    this.emit('login', response);
+    return response;
   }
 
   logout() {

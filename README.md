@@ -7,9 +7,9 @@
 support for authentication, including social login. It also exposes hooks for
 using Reindex with Relay and other libraries.
 
-Some features (like handling Social Login, storing authentication info) only
-makes sense in a browser, but otherwise the library can also be used on server
-with nodejs.
+`reindex-js` is a universal Javascript library, so it works in browser, React
+Native and Node.js. However, some features, like social login, currently only
+works in browser.
 
 ## Installation
 
@@ -67,6 +67,27 @@ promise rejects with an error as result.
 Token is stored inside the instance and inside browser `localStorage`.
 
 Emits `login` and `tokenChange` events.
+
+##### `.loginWithToken(providerName: String, loginToken: String)`
+
+Attempt to login to Reindex with an Auth0 `idToken`.
+Currently only Auth0 (`auth0`) is supported. Reindex validates the token on
+the backend side and performs normal login there. As no browser interaction is
+required from user, it can be used on server or in React Native.
+Otherwise behaves as `login`: sets token and stores token in `localStorage`
+(if available).
+
+Emits `login` and `tokenChange` events.
+
+Example usage with Auth0 lock:
+
+```js
+const reindex = new Reindex(reindexURL);
+const lock = new Auth0Lock(auth0ClientID, auth0Domain);
+lock.show((error, profile, id_token) => {
+  reindex.loginWithToken('auth0', id_token);
+});
+```
 
 ##### `.logout() -> Promise`
 

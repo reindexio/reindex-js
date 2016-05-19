@@ -64,9 +64,9 @@ the promise returned is resolved with an object with following properties:
 * `token` - JSON Web Token for the user,
 * `user` - information about the user.
 
-If the log in fails, promise is reject with an error.
+If the log in fails, the promise is reject with an error.
 
-Token is stored in the `Reindex` instance and in `localStorage` of the browser.
+The token is stored in the `Reindex` instance and in `localStorage` of the browser.
 
 Emits `login` and `tokenChange` events.
 

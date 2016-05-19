@@ -9,7 +9,7 @@ using Reindex with Relay and other libraries.
 
 `reindex-js` is a universal JavaScript library, so it works in the browser,
 React Native and Node.js. However, log in with social providers (the `login()`
-method) is only available in the browser. Log in with Auth0 (`loginWithToken()`
+method) is only available in the browser. Log in with Auth0 (`loginWithToken()`)
 is also supported on React Native.
 
 ## Installation

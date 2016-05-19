@@ -7,9 +7,10 @@
 support for authentication, including social login. It also exposes hooks for
 using Reindex with Relay and other libraries.
 
-Some features (like handling Social Login, storing authentication info) only
-makes sense in a browser, but otherwise the library can also be used on server
-with nodejs.
+`reindex-js` is a universal JavaScript library, so it works in the browser,
+React Native and Node.js. However, log in with social providers (the `login()`
+method) is only available in the browser. Log in with Auth0 (`loginWithToken()`)
+is also supported on React Native.
 
 ## Installation
 
@@ -54,19 +55,39 @@ retrieved and stored inside the instance.
 
 *Browser only*
 
-Attempt to login with a `providerName`. Currently only Social Login providers
-are available (`google`, `facebook`, `twitter`, `github`). Provider should be
-set up and enabled in your Reindex app.
+Attempt to login with a `providerName` (`google`, `facebook`, `twitter` or
+`github`). The provider should be set up and enabled in your Reindex app.
 
-Practically, it opens a browser window with provider's login screen, where user
-needs to grant your application permissions to read his data. If everything
-succeeds promise is resolved with an object of `token` - JSON Web Token for the
-user, `user` - information about the user. If anything fails for any reason,
-promise rejects with an error as result.
+Opens a browser window with provider's login screen, where the user needs to
+grant your application permissions to read their data. If everything succeeds
+the promise returned is resolved with an object with following properties:
+* `token` - JSON Web Token for the user,
+* `user` - information about the user.
 
-Token is stored inside the instance and inside browser `localStorage`.
+If the log in fails, the promise is reject with an error.
+
+The token is stored in the `Reindex` instance and in `localStorage` of the browser.
 
 Emits `login` and `tokenChange` events.
+
+##### `.loginWithToken(providerName: String, loginToken: String)`
+
+Attempt to login to Reindex with an [Auth0
+`id_token`](https://auth0.com/docs/tokens/id_token). Reindex validates the token
+on the backend side and logs the user in. Like `login`, sets token in the
+`Reindex` object and stores it in `localStorage` (if available). 
+
+Emits `login` and `tokenChange` events.
+
+Example usage with Auth0 Lock:
+
+```js
+const reindex = new Reindex(reindexURL);
+const lock = new Auth0Lock(auth0ClientID, auth0Domain);
+lock.show((error, profile, id_token) => {
+  reindex.loginWithToken('auth0', id_token);
+});
+```
 
 ##### `.logout() -> Promise`
 
